@@ -14,23 +14,26 @@ const stripe = require("stripe")(
 
   
 router.post("/bookroom", async (req, res) => {
-    const { room, fromdate, todate, totalDays, totalAmount, user , token } = req.body;
+    const { room, fromdate, todate, totalDays,totalAmount, user , token } = req.body;
   
 
       try {
         const customer = await stripe.customers.create({
           email: token.email,
           source: token.id,
+      
         });
        
 
         const payment = await stripe.charges.create(
           {
-            amount: totalAmount * 100,
+            amount: totalAmount * 1000,
             currency: "lkr",
             customer: customer.id,
             receipt_email: token.email,
+          
           },
+         
           {
             idempotencyKey: uuidv4(),
           }
@@ -43,6 +46,7 @@ router.post("/bookroom", async (req, res) => {
             userid: user._id,
             room: room.name,
             roomid: room._id,
+            phonenumber:room.phonenumber,
             totalDays: totalDays,
             fromdate: moment(fromdate).format("DD-MM-YYYY"),
             todate: moment(todate).format("DD-MM-YYYY"),
