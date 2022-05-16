@@ -21,6 +21,7 @@
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "shoutout-sdk": "^3.0.4",
     "stripe": "^9.1.0",
     "uuid": "^8.3.2"
   },
