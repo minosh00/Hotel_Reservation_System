@@ -1,5 +1,4 @@
 
-
  import React, { useEffect , useState } from 'react'
  import axios from "axios";
  import Swal from 'sweetalert2'
@@ -7,7 +6,8 @@
  import Loader from "../Components/Loader";
  import Success from '../Components/Success'
  import StripeCheckout from 'react-stripe-checkout'
- 
+ import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
  import moment from "moment"
  import AOS from 'aos';
 
@@ -15,6 +15,24 @@
  AOS.refresh()
 
  function BookingRoom({match}) {
+
+
+     const smsfunc= (e) => {
+        e.preventDefault();
+        let number = JSON.parse(localStorage.getItem('currentUser')).phonenumber
+        console.log("Phone number ",number)
+        let data = {
+            number:number
+        }
+        axios.post("http://localhost:5000/smsroute/sms/",data)
+        .then((data)=>{
+            console.log(data);
+            alert("Success");
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+ }
 
      const[loading, setloading]=useState(true);
      const[error, seterror]=useState(false)
@@ -25,6 +43,14 @@
      const todate=moment(match.params.todate,'DD-MM-YYYY')
      const totalDays = moment.duration(todate.diff(fromdate)).asDays()+1
      const [totalAmount , settotalAmount]=useState()
+     const [phonenumber , setphonenumber]=useState()
+
+
+
+
+   
+
+
 
      useEffect(async() => {
          
@@ -33,6 +59,7 @@
              const data = await (await axios.post("http://localhost:5000/api/rooms/getRoomByid" , {roomid})).data;
              console.log(data);
              setroom(data);
+             setphonenumber(data);
              setloading(false);
              settotalAmount(data.rentPerDay * totalDays)
            } catch (error) {
@@ -42,6 +69,8 @@
            
      }, [])
  
+    
+
  
      async function tokenHander(token) {
      
@@ -53,6 +82,7 @@
              room ,
              fromdate,
              todate,
+             phonenumber,
              totalDays,
              totalAmount
  
@@ -97,7 +127,7 @@
                             <p><b>Name</b> : {JSON.parse(localStorage.getItem('currentUser')).name}</p>
                             <p><b>From Date</b> : {match.params.fromdate}</p>
                             <p><b>To Date</b> : {match.params.todate}</p>
-                        
+                            <p><b>phonenumber</b> : {JSON.parse(localStorage.getItem('currentUser')).phonenumber}</p>
                             </div>
                             
                             <div className='mt-5'>
@@ -105,19 +135,24 @@
                          
                             <p>Total Days : <b>{totalDays}</b></p>
                             <p>Rent Per Day : <b>{room.rentPerDay}</b></p>
+                            <p>phoneNumber : <b>{room.phoneNumber}</b></p>
                             <h1><b>Total Amount : {totalAmount} /-</b></h1>
  
-                            
 
-                   
+
+     
+
 
                            <StripeCheckout
-        
+                         
+         amount={totalAmount*100}   
+         currency='LKR'
+
             token={tokenHander}
             stripeKey='pk_test_51KyZL6FeoRdqg6f816PBNMT9VvvDUCbwgUS6pvLiK2kQ6Mvx3q4BOFTQc9ENZpb0IeCH2a3GABcaxBbTStcyvocg00TK9Bbc8z' >
 
-                  
-                  <button className='btn btn-primary'>Pay Now</button>
+
+                  <button className='btn btn-primary' onClick={(e)=>smsfunc(e)}>Pay Now</button>
 
             </StripeCheckout> 
          
@@ -136,4 +171,3 @@
  }
  
  export default BookingRoom;
- 
