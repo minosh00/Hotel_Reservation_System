@@ -16,6 +16,8 @@ export default function RegisterUser() {
   const[loading, setloading]=useState(false)
   const[error, seterror]=useState(false)
   const[success, setsuccess]=useState(false) 
+  const [phonenumber, setphonenumber] = useState("");
+  
   async function register(){
 
       if(password!=cpassword)
@@ -27,7 +29,9 @@ export default function RegisterUser() {
               name,
               email,
               country,
-              password
+              password,
+              phonenumber
+
           }
           
           try {
@@ -37,6 +41,7 @@ export default function RegisterUser() {
             setsuccess(true)
             setemail('')
             setname('')
+            setphonenumber('')
             setcountry('')
             setcpassword('')
             setpassword('')
@@ -74,6 +79,15 @@ export default function RegisterUser() {
               required
               onChange={(e)=>{setcountry(e.target.value)}}
             />
+               <input
+              type="text"
+              placeholder="phone number"
+              className="form-control mt-1"
+              value={phonenumber}
+              required
+              onChange={(e)=>{setphonenumber(e.target.value)}}
+            />
+          
             <input
               type="password"
               placeholder="password"

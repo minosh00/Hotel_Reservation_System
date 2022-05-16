@@ -32,6 +32,11 @@ function DisplayAllRooms({ room, fromdate, todate }) {
           <b>rent Per Day : {room.rentPerDay}</b>
         </p>
         
+        <p>
+          <b>phoneNumber : {room.phoneNumber}</b>
+        </p>
+        
+
 
         <div style={{ float: "right" }}>
           {fromdate && todate && (
