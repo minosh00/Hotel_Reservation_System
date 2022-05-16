@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/User" name="User" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/getAllUsers">
+        <inSequence>
+            <send>
+                <endpoint key="getAllUsers"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/register">
+        <inSequence>
+            <send>
+                <endpoint key="register"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/rooms" name="rooms" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/getallrooms">
+        <inSequence>
+            <send>
+                <endpoint key="getallrooms"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/addrooms">
+        <inSequence>
+            <send>
+                <endpoint key="addroom"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>
