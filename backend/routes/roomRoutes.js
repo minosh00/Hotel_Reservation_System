@@ -33,7 +33,7 @@ Router.post("/getRoomByid/", async(req, res) => {
      console.log(req.body);
     const {id} = req.params;
      try {
-          const room = await Room.findOne({'_id' : req.body.id})
+          const room = await Room.findOne({'_id' : req.body._id})
           res.send(room)
      } catch (error) {
           return res.status(400).json({ message: error });
@@ -53,6 +53,9 @@ Router.get("/getallrooms", async(req, res) => {
           return res.status(400).json({ message: error });
      }
 });
+
+
+
 
 
 Router.post("/addRoom", async(req, res) => {
@@ -93,6 +96,7 @@ Router.post("/addRoom", async(req, res) => {
      .catch(err => res.status(400).json(`${err}`));
  });
  
+
 
 
 

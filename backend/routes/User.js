@@ -117,4 +117,3 @@ userRouter.get('/authenticated',passport.authenticate('jwt',{session : false}),(
 
 
    module.exports = userRouter;
-

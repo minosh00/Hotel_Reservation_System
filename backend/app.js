@@ -46,9 +46,9 @@ app.use('/api/bookings' , bookingsRoute)
 
 
 
+const smsRoutes = require("./routes/smsRoutes");
+app.use("/smsroute", smsRoutes);
 
-const smsRoutes=require('./routes/smsRoutes')
-app.use('/smsroute' , smsRoutes)
 
 
 

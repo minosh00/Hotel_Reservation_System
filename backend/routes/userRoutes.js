@@ -9,7 +9,7 @@ router.post("/register", async(req, res) => {
   
     const {name , email , password,country,phonenumber} = req.body
 
-    const newUser = new User({name , email ,country, password,phonenumber})
+    const newUser = new User({name , email ,country,phonenumber ,password})
 
     try {
         newUser.save()
@@ -36,7 +36,7 @@ router.post("/login", async(req, res) => {
             const currentUser = {
                 name : user[0].name , 
                 email : user[0].email, 
-                phonenumber :user[0].phonenumber,
+                phonenumber: user[0].phonenumber,
                 isAdmin : user[0].isAdmin, 
                 _id : user[0]._id
             }
@@ -65,9 +65,20 @@ router.get("/getAllUsers", async(req, res) => {
 });
 
 
+router.post("/deleteUser/:id", async(req, res) => {
+  
+    const userid = req.body.userid
+
+    try {
+        await User.findOneAndDelete({_id : userid})
+        res.send('User Deleted Successfully')
+    } catch (error) {
+        return res.status(400).json({ message: error });
+    }
+
+});
 
 
 
 
 module.exports = router
-
