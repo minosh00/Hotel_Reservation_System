@@ -4,7 +4,7 @@ import Message from '../Components/Message';
 
 const Register = props=>{
 
-    const [user,setUser] = useState({username: "", password : "", email : "", role : "user"});
+    const [user,setUser] = useState({username: "", password : "", email : "", role : "admin"});
     const [message,setMessage] = useState(null);
     let timerID = useRef(null);
 

@@ -54,20 +54,20 @@ function App() {
         <Route path="/Mailer" component={Mailer} />
         <Route path="/Sms" component={Sms} />
         <Route path="/update/:id"    render={(props)=>  <UpdateRooms {...props} posts={room} />} />
-        <PrivateRoute path="/Admin" roles={["admin"]} component={Admin} />
+        <PrivateRoute path="/Admin" roles={["admin" , "sysadmin"]} component={Admin} />
         <PrivateRoute
           path="/allReservation"
-          roles={["admin"]}
+          roles={["admin" ,"sysadmin"]}
           component={AllReservationAdmin}
         />
         <PrivateRoute
           path="/adminroom"
-          roles={["admin"]}
+          roles={["admin" ,"sysadmin"]}
           component={ManageAllRooms}
         />
         <PrivateRoute
           path="/ManageAllUsers"
-          roles={["admin"]}
+          roles={["admin" ,"sysadmin"]}
           component={ManageAllUsers}
         />
 
