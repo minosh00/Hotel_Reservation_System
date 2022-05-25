@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/taxi" name="taxi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/getalltaxi">
+        <inSequence>
+            <send>
+                <endpoint key="getalltaxi"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>

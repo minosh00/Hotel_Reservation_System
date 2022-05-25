@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/booking" name="booking" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/getAllBooking">
+        <inSequence>
+            <send>
+                <endpoint key="getAllBooking"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>
