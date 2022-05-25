@@ -4,6 +4,7 @@ import axios from "axios";
 import Error from "../Components/Error";
 import Loader from "../Components/Loader";
 import Success from '../Components/Success'
+import Swal from "sweetalert2";
 
 export default function RegisterUser() {
 
@@ -17,12 +18,17 @@ export default function RegisterUser() {
   const[loading, setloading]=useState(false)
   const[error, seterror]=useState(false)
   const[success, setsuccess]=useState(false) 
+
+
+
+
+
   async function register(){
 
-      if(password!=cpassword)
-      {
-          alert("passwords not matched")
-      }
+      if(password!=cpassword  || email === "" || country === "" || phonenumber === "")
+      {   Swal.fire('error' , 'Fill The All Data or passowrd does not match  ' , 'error')
+      
+        }
       else{
           const user={
               name,
@@ -68,7 +74,7 @@ export default function RegisterUser() {
           <div>
             <input required type="text" placeholder="name" className="form-control mt-1" value={name} onChange={(e)=>{setname(e.target.value)}} />
           
-            <input required type="text" placeholder="email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} />
+            <input required type="email" placeholder="email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} />
             <input
               type="text"
               placeholder="country"
@@ -83,6 +89,7 @@ export default function RegisterUser() {
               className="form-control mt-1"
               value={phonenumber}
               required
+              max={11}
               onChange={(e)=>{setphonenumber(e.target.value)}}
             />
             <input
@@ -90,6 +97,7 @@ export default function RegisterUser() {
               placeholder="password"
               className="form-control mt-1"
               value={password}
+              min={4}
               required
               onChange={(e)=>{setpassword(e.target.value)}}
             />

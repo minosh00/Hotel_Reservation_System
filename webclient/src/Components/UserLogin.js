@@ -5,7 +5,8 @@
  import Error from "../Components/Error";
  import Loader from "../Components/Loader";
  import Success from "../Components/Success";
- 
+ import Swal from "sweetalert2";
+
  
  export default function UserLogin() {
    
@@ -26,7 +27,14 @@
      }, [])
  
      async function login(){
-       const user={
+
+      if(email === '' || password === "" )
+
+      {   Swal.fire('error' , 'Fill The All Data or password empty  ' , 'error')
+      
+        }
+
+      else {const user={
       
          email,
          password
@@ -43,7 +51,7 @@
          
        }
      }
- 
+    }
      return (
          <div className='login'>
           <div className="row justify-content-center mt-12">
@@ -56,13 +64,13 @@
            {error && (<Error error='Invalid Credentials'/>)}
            {success && (<Success success='User Login Successfully'/>)}
            <div>
-             <input required type="text" placeholder=" enter your email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} /><br></br>
+             <input required="" type="email" placeholder=" enter your email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} /><br></br>
              <input
-               type="text"
+               type="passowrd"
                placeholder="enter your  password"
                className="form-control mt-1"
                value={password}
-               required
+               required=""
                onChange={(e)=>{setpassword(e.target.value)}}
              />
              

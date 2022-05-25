@@ -39,7 +39,7 @@
     "scrollmagic": "^2.0.8",
     "shoutout-sdk": "^3.0.4",
     "space": "^0.22.2",
-    "sweetalert2": "^11.0.16",
+    "sweetalert2": "^11.4.17",
     "sweetalert2-react": "^0.8.3",
     "web-vitals": "^2.1.4"
   },

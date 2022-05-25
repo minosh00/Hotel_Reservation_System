@@ -2,6 +2,7 @@ import React, {useState,useContext} from 'react';
 import AuthService from '../Services/AuthService';
 import Message from '../Components/Message';
 import {AuthContext} from '../Context/AuthContext';
+import Swal from "sweetalert2";
 
 
 const Login = props=>{
@@ -28,6 +29,13 @@ const Login = props=>{
             if(isAuthenticated){
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
+
+                {   Swal.fire('Congrats' , 'successfully Login  ' , 'success')
+
+               
+                props.history.push('/AdminNarBar');
+                   }
+          
                 props.history.push('/AdminNarBar');
             }
             else
